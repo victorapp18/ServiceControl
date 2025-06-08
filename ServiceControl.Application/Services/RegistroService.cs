@@ -2,7 +2,6 @@
 using ServiceControl.Application.Interfaces;
 using ServiceControl.Domain.Entities;
 using ServiceControl.Domain.Enums;
-using ServiceControl.Infrastructure.Data;
 using ServiceControl.Domain.Interfaces;
 using Microsoft.Win32;
 

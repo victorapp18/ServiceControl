@@ -8,6 +8,7 @@ using ServiceControl.Infrastructure.Repositories;
 using ServiceControl.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using ServiceControl.Domain.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
