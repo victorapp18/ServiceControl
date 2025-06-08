@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="ExternalServices\" />
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\ServiceControl.Domain\ServiceControl.Domain.csproj" />
   </ItemGroup>
 
 </Project>

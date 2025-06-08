@@ -17,4 +17,8 @@
     <Folder Include="Filters\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceControl.Application\ServiceControl.Application.csproj" />
+  </ItemGroup>
+
 </Project>
