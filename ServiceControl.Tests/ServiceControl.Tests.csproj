@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ServiceControl.Application\ServiceControl.Application.csproj" />
+    <ProjectReference Include="..\ServiceControl.Domain\ServiceControl.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 
