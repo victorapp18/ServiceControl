@@ -33,7 +33,7 @@ namespace ServiceControl.Application.Services
 
             var registro = new Registro
             {
-                Id = dto.Id,
+                Id = Guid.NewGuid().ToString(),
                 ServicoExecutado = dto.ServicoExecutado,
                 Data = dto.Data,
                 Responsavel = dto.Responsavel,
