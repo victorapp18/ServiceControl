@@ -1,44 +1,54 @@
-using Microsoft.AspNetCore.Builder;
+ï»¿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using ServiceControl.Application.Interfaces;
 using ServiceControl.Application.Services;
 using ServiceControl.Domain.Interfaces;
 using ServiceControl.Infrastructure.Data;
-using ServiceControl.Infrastructure.ExternalServices;
 using ServiceControl.Infrastructure.Repositories;
 using ServiceControl.Infrastructure.Settings;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Adiciona configurações a partir do appsettings.json
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+// 1) Faz o bind de OpenWeatherMapSettings
+builder.Services.Configure<OpenWeatherMapSettings>(
+    builder.Configuration.GetSection("OpenWeatherMapSettings"));
 
-// Configuração de serviços
+// 2) Registra o HttpClient para IClimaService â†’ WeatherService
+//    Dentro do callback, usamos IOptions<OpenWeatherMapSettings> para ler ApiKey e BaseUrl
+builder.Services.AddHttpClient<IClimaService, WeatherService>((sp, client) =>
+{
+    var settings = sp.GetRequiredService<IOptions<OpenWeatherMapSettings>>().Value;
+
+    // Garante que o BaseUrl tenha sido definido no appsettings.json
+    if (string.IsNullOrWhiteSpace(settings.BaseUrl))
+    {
+        throw new InvalidOperationException(
+            "OpenWeatherMapSettings:BaseUrl nÃ£o pode estar em branco. " +
+            "Verifique seu appsettings.json em ServiceControl.API."
+        );
+    }
+
+    client.BaseAddress = new Uri(settings.BaseUrl);
+});
+
+// 3) Registra o DbContext (InMemory) e o repositÃ³rio de Registro
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseInMemoryDatabase("ServiceControlDb"));
+builder.Services.AddScoped<IRegistroRepository, RegistroRepository>();
+
+// 4) Registra o serviÃ§o de domÃ­nio
+builder.Services.AddScoped<IRegistroService, RegistroService>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configuração do banco de dados em memória
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseInMemoryDatabase("ServiceControlDb"));
-
-// Injeção de dependências
-builder.Services.AddScoped<IRegistroService, RegistroService>();
-builder.Services.AddScoped<IRegistroRepository, RegistroRepository>();
-
-// Configurações da OpenWeatherMap
-builder.Services.Configure<OpenWeatherMapSettings>(
-    builder.Configuration.GetSection("OpenWeatherMap"));
-
-// HttpClient com injeção de OpenWeatherMapService
-builder.Services.AddHttpClient<IClimaService, OpenWeatherMapService>();
-
 var app = builder.Build();
 
-// Middlewares
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

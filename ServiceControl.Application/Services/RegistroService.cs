@@ -33,13 +33,12 @@ namespace ServiceControl.Application.Services
 
             var registro = new Registro
             {
-                Id = Guid.NewGuid().ToString(),
                 ServicoExecutado = dto.ServicoExecutado,
                 Data = dto.Data,
                 Responsavel = dto.Responsavel,
                 Cidade = dto.Cidade,
                 Temperatura = clima,
-                CondicaoClimatica = condicao
+                CondicaoClimatica = condicao.ToString()
             };
 
             await _repository.SalvarAsync(registro);
