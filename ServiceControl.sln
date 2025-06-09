@@ -13,13 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl.Tests", "ServiceControl.Tests\ServiceControl.Tests.csproj", "{BD0219C0-6885-4C45-B854-C1BA30CEB3C5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{6FC3D39E-4EB5-4D10-9568-8866B5418B64}"
-	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-		docker-compose.yml = docker-compose.yml
-		ServiceControl.API\Dockerfile = ServiceControl.API\Dockerfile
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
