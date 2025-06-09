@@ -1,4 +1,5 @@
 ﻿using ServiceControl.Domain.Enums;
+using System;
 
 namespace ServiceControl.Domain.Entities
 {
@@ -8,6 +9,7 @@ namespace ServiceControl.Domain.Entities
         public string ServicoExecutado { get; set; }
         public DateTime Data { get; set; }
         public string Responsavel { get; set; }
+        public string Cidade { get; set; }
         public double Temperatura { get; set; }
         public CondicaoClimatica CondicaoClimatica { get; set; }
     }
