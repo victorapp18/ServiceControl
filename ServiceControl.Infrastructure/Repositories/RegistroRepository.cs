@@ -1,6 +1,9 @@
 ﻿using ServiceControl.Domain.Entities;
 using ServiceControl.Domain.Interfaces;
 using ServiceControl.Infrastructure.Data;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ServiceControl.Infrastructure.Repositories
 {
@@ -17,6 +20,11 @@ namespace ServiceControl.Infrastructure.Repositories
         {
             _context.Registros.Add(registro);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Registro>> ObterTodosAsync()
+        {
+            return await _context.Registros.ToListAsync();
         }
     }
 }

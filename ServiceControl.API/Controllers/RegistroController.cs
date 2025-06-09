@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceControl.Application.DTOs;
 using ServiceControl.Application.Interfaces;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ServiceControl.API.Controllers
 {
@@ -18,8 +20,15 @@ namespace ServiceControl.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] RegistroInputDto dto)
         {
-            var result = await _registroService.ProcessarRegistroAsync(dto);
-            return Ok(result);
+            var resultado = await _registroService.ProcessarRegistroAsync(dto);
+            return Ok(resultado);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            IEnumerable<RegistroOutputDto> registros = await _registroService.ObterTodosAsync();
+            return Ok(registros);
         }
     }
 }
