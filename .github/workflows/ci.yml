@@ -1,4 +1,4 @@
-name: CI - Build, Test and Push Docker
+name: CI - Build and Push Docker
 
 on:
   push:
@@ -29,7 +29,6 @@ jobs:
 
       - name: Run tests
         run: dotnet test ServiceControl.Tests/ServiceControl.Tests.csproj --no-build --verbosity normal
-        # Ajuste o caminho do seu projeto de testes, se for diferente
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
