@@ -5,51 +5,47 @@ on:
     branches:
       - master
     tags:
-      - 'v*'  # dispara também em tags como v1.0.0
+      - 'v*'  # Ex: v1.0.0, v2.1.3
 
 jobs:
   build-test-and-push:
     runs-on: ubuntu-latest
 
     steps:
-      # ✅ Passo 1: checkout do repositório
+      # 🔁 1. Checkout do código
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # ✅ Passo 2: configuração do .NET 8
+      # ⚙️ 2. Instalar SDK do .NET 8
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      # ✅ Passo 3: restaurar pacotes
+      # 📦 3. Restaurar dependências
       - name: Restore NuGet packages
         run: dotnet restore ServiceControl.sln
 
-      # ✅ Passo 4: compilar a solução
+      # 🏗️ 4. Compilar
       - name: Build solution
         run: dotnet build ServiceControl.sln --no-restore --configuration Release
 
-      # ✅ Passo 5: executar testes unitários
+      # 🧪 5. Testar
       - name: Run unit tests
         run: dotnet test ServiceControl.sln --no-restore --configuration Release --verbosity normal
 
-      # ✅ Passo 6: listar arquivos (debugar caminhos)
-      - name: List repository files
-        run: ls -R .
-
-      # ✅ Passo 7: configurar Docker Buildx
+      # 🐳 6. Configurar Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      # ✅ Passo 8: logar no Docker Hub
+      # 🔐 7. Login no Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # ✅ Passo 9: build, publish e push da imagem
+      # 📦 8. Build + Push Docker Image
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
