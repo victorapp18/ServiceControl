@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl.API", "ServiceControl.API\ServiceControl.API.csproj", "{3AF04C27-10F1-4AC7-98DB-1094C0D78210}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceControl.Application", "ServiceControl.Application\ServiceControl.Application.csproj", "{9FA21B48-A65D-42AB-800F-4B9DDAEDEA12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl.Application", "ServiceControl.Application\ServiceControl.Application.csproj", "{9FA21B48-A65D-42AB-800F-4B9DDAEDEA12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceControl.Domain", "ServiceControl.Domain\ServiceControl.Domain.csproj", "{B9FBB097-F8B1-48DF-A88A-B56FF81C5A67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl.Domain", "ServiceControl.Domain\ServiceControl.Domain.csproj", "{B9FBB097-F8B1-48DF-A88A-B56FF81C5A67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceControl.Infrastructure", "ServiceControl.Infrastructure\ServiceControl.Infrastructure.csproj", "{37EDF22B-0C75-4EC2-8390-19E484209FB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl.Infrastructure", "ServiceControl.Infrastructure\ServiceControl.Infrastructure.csproj", "{37EDF22B-0C75-4EC2-8390-19E484209FB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceControl.Tests", "ServiceControl.Tests\ServiceControl.Tests.csproj", "{BD0219C0-6885-4C45-B854-C1BA30CEB3C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl.Tests", "ServiceControl.Tests\ServiceControl.Tests.csproj", "{BD0219C0-6885-4C45-B854-C1BA30CEB3C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl.WebAPI", "ServiceControl.WebAPI\ServiceControl.WebAPI.csproj", "{C87908EA-4D0F-4DC0-BC1B-8E0FBBE9DACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3AF04C27-10F1-4AC7-98DB-1094C0D78210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3AF04C27-10F1-4AC7-98DB-1094C0D78210}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3AF04C27-10F1-4AC7-98DB-1094C0D78210}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3AF04C27-10F1-4AC7-98DB-1094C0D78210}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9FA21B48-A65D-42AB-800F-4B9DDAEDEA12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9FA21B48-A65D-42AB-800F-4B9DDAEDEA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FA21B48-A65D-42AB-800F-4B9DDAEDEA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{BD0219C0-6885-4C45-B854-C1BA30CEB3C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD0219C0-6885-4C45-B854-C1BA30CEB3C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD0219C0-6885-4C45-B854-C1BA30CEB3C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C87908EA-4D0F-4DC0-BC1B-8E0FBBE9DACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C87908EA-4D0F-4DC0-BC1B-8E0FBBE9DACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C87908EA-4D0F-4DC0-BC1B-8E0FBBE9DACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C87908EA-4D0F-4DC0-BC1B-8E0FBBE9DACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

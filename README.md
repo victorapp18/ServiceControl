@@ -1,118 +1,65 @@
+# ServiceControl API
 
-# ServiceControl - Projeto para Construtora Caiapó
-
-Olá!  
-Seja bem-vindo ao projeto **ServiceControl**. Essa aplicação foi desenvolvida como parte de um processo seletivo para a **Construtora Caiapó**. Aqui você vai encontrar tudo o que precisa para entender, rodar e testar o projeto localmente.
+Projeto API em .NET 8 para controle de registros e integração com a API OpenWeatherMap.
 
 ---
 
-## O que é o ServiceControl?
+## Como rodar o projeto localmente com Docker
 
-O ServiceControl é um microserviço em .NET 8 que registra dados de obras (como nome, localização e clima atual). Ele se comunica com a API pública do OpenWeatherMap para obter as informações climáticas, e armazena os dados em memória (não precisa de banco de dados para testes locais).
+Siga os passos abaixo para rodar a aplicação usando Docker, garantindo que tudo vai funcionar certinho.
 
----
-
-## Principais tecnologias usadas
-
-- .NET 8
-- ASP.NET Core (Web API)
-- Injeção de dependência (nativa do .NET)
-- Arquitetura em camadas
-- SOLID, boas práticas e clean code
-- API REST com endpoints organizados
-- Swagger para documentação interativa
-- Testes unitários com xUnit
-- Requisições externas com `HttpClient`
-
----
-
-## Estrutura do projeto
-
-```
-ServiceControl
-│
-├── ServiceControl.API              → Camada de apresentação (controllers, configurações)
-├── ServiceControl.Application      → Lógica de aplicação (serviços, interfaces)
-├── ServiceControl.Domain           → Entidades e interfaces de domínio
-├── ServiceControl.Infrastructure   → Implementações de repositórios, chamadas HTTP
-└── ServiceControl.Tests            → Testes unitários com xUnit
-```
-
----
-
-## Como rodar o projeto localmente
-
-### 1. Clonar o repositório
+### Passo 1: Clone o repositório
 
 ```bash
-git clone https://github.com/victorapp18/ServiceControl.git
+git clone https://seu-repositorio.git
 cd ServiceControl
 ```
 
-### 2. Abrir no Visual Studio
+### Passo 2: Verifique a configuração do Docker Compose
 
-> Certifique-se de ter o SDK do **.NET 8** instalado.
+No arquivo `docker-compose.yml`, a aplicação está configurada para expor a porta 80 do container na porta 5000 da sua máquina local. Ou seja, para acessar a API, você vai usar a porta 5000.
 
-### 3. Configurar a chave do OpenWeatherMap
+### Passo 3: Ajuste do appsettings.json
 
-No arquivo `appsettings.json`:
+Certifique-se que o arquivo `appsettings.json` está na pasta correta (`ServiceControl.WebAPI`) e contém a configuração do OpenWeatherMap com a chave API e base URL.
+
+Exemplo mínimo:
 
 ```json
-"OpenWeatherMap": {
-  "ApiKey": "363c8ee76db578dd2d6bb358e90d94e4",
-  "BaseUrl": "https://api.openweathermap.org/data/2.5/weather"
+{
+  "OpenWeatherMapSettings": {
+    "ApiKey": "363c8ee76db578dd2d6bb358e90d94e4",
+    "BaseUrl": "https://api.openweathermap.org/data/2.5/"
+  }
 }
 ```
 
-### 4. Rodar a aplicação
+### Passo 4: Build e execução do container
 
-Execute o projeto `ServiceControl.API` no Visual Studio com `F5` ou `Ctrl + F5`.
-
----
-
-## Executando com Docker
-
-### Pré-requisitos
-
-- Docker instalado na máquina
-
-### Passos
-
-1. Criar a imagem Docker:
+No terminal, dentro da pasta raiz do projeto, rode:
 
 ```bash
-docker build -t servicecontrol-api -f ServiceControl.API/Dockerfile .
+docker-compose up --build
 ```
 
-2. Rodar o container:
+Isso vai construir a imagem e iniciar o container da API.
 
-```bash
-docker run -d -p 5000:80 --name servicecontrol   -e "OpenWeatherMap__ApiKey=SUA_CHAVE_AQUI"   -e "OpenWeatherMap__BaseUrl=https://api.openweathermap.org/data/2.5/weather"   servicecontrol-api
-```
+### Passo 5: Acesse a API
 
-3. Acessar a API:
+Abra o navegador ou uma ferramenta como Postman e acesse:
 
 ```
 http://localhost:5000/swagger
 ```
 
----
-
-## Rodando os testes
-
-```bash
-dotnet test
-```
+Aqui você poderá visualizar a documentação automática da API e testar os endpoints.
 
 ---
 
-## Autor
+## Observações importantes
 
-Projeto desenvolvido por Victor Arthur para o processo seletivo da Construtora Caiapó.
+- O projeto está configurado para escutar na porta 80 dentro do container, por isso fazemos o mapeamento da porta 5000 da máquina para a porta 80 do container.
+- Caso precise mudar a porta local, ajuste o arquivo `docker-compose.yml` no campo `ports`.
+- Garanta que nenhuma outra aplicação esteja usando a porta local que escolher.
+- Para parar o container, use `docker-compose down`.
 
----
-
-## Contato
-
-- Email: victorapp18@gmail.com
-- LinkedIn: https://www.linkedin.com/in/victor-arthur-b9ba57a9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
