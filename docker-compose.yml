@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  servicecontrolapi:
+    build:
+      context: .
+      dockerfile: /ServiceControl.WebAPI/Dockerfile
+    ports:
+        - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./ServiceControl.WebAPI/appsettings.json:/app/appsettings.json

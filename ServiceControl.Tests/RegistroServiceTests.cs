@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using ServiceControl.Application.DTOs;
 using ServiceControl.Application.Services;
 using ServiceControl.Domain.Entities;
 using ServiceControl.Domain.Interfaces;
 using Xunit;
+using ServiceControl.Application.Interfaces;
 
 namespace ServiceControl.Tests.Services
 {
@@ -15,13 +17,23 @@ namespace ServiceControl.Tests.Services
     {
         private readonly Mock<IClimaService> _climaServiceMock;
         private readonly Mock<IRegistroRepository> _registroRepositoryMock;
+        private readonly Mock<IServiceBClient> _serviceBClientMock;
+        private readonly Mock<ILogger<RegistroService>> _loggerMock;
         private readonly RegistroService _registroService;
 
         public RegistroServiceTests()
         {
             _climaServiceMock = new Mock<IClimaService>();
             _registroRepositoryMock = new Mock<IRegistroRepository>();
-            _registroService = new RegistroService(_climaServiceMock.Object, _registroRepositoryMock.Object);
+            _serviceBClientMock = new Mock<IServiceBClient>();
+            _loggerMock = new Mock<ILogger<RegistroService>>();
+
+            _registroService = new RegistroService(
+                _climaServiceMock.Object,
+                _registroRepositoryMock.Object,
+                _serviceBClientMock.Object,
+                _loggerMock.Object
+            );
         }
 
         [Theory]
@@ -45,6 +57,10 @@ namespace ServiceControl.Tests.Services
 
             _registroRepositoryMock
                 .Setup(x => x.SalvarAsync(It.IsAny<Registro>()))
+                .Returns(Task.CompletedTask);
+
+            _serviceBClientMock
+                .Setup(x => x.EnviarRegistroAsync(It.IsAny<Registro>()))
                 .Returns(Task.CompletedTask);
 
             // Act

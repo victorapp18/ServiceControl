@@ -4,7 +4,7 @@ using ServiceControl.Application.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ServiceControl.API.Controllers
+namespace ServiceControl.WebAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
